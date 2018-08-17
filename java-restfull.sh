@@ -1,5 +1,6 @@
 #!/bin/bash
 yum update -y
+yum install -y wget
 
 # download and install repo
 wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -11,14 +12,16 @@ yum install -y ansible
 # configure ansible
 echo “localhost ansible_connection=local” >> /etc/ansible/hosts
 
-# Install Git to get ansible scriptq
-yum install -y git
+# init work directory
+mkdir -p /home/ec2-user/work/ansible
+cd /home/ec2-user/work/ansible
+wget https://raw.githubusercontent.com/gkarthur/ansible/master/basics.yml
+wget https://raw.githubusercontent.com/gkarthur/ansible/master/java.yml
 
-mkdir /home/ec2-user/work
-cd /home/ec2-user/work
-git clone https://github.com/gkarthur/ansible.git
-cp ansible/*.yml /etc/ansible/roles/
+cp -f *.yml /etc/ansible/roles/
 
-# install tools
+# install basic tools
 ansible-playbook /etc/ansible/roles/basics.yml
+
+# install java jdk
 ansible-playbook /etc/ansible/roles/java.yml
