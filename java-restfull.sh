@@ -10,7 +10,7 @@ yum update -y
 yum install -y ansible
 
 # configure ansible
-echo “localhost ansible_connection=local” >> /etc/ansible/hosts
+echo 'localhost ansible_connection=local' >> /etc/ansible/hosts
 
 # init work directory
 mkdir -p /home/ec2-user/work/ansible
@@ -19,6 +19,9 @@ wget https://raw.githubusercontent.com/gkarthur/ansible/master/basics.yml
 wget https://raw.githubusercontent.com/gkarthur/ansible/master/java.yml
 
 cp -f *.yml /etc/ansible/roles/
+
+# access right
+chown -R ec2-user:ec2-user /etc/ansible /home/ec2-user/work
 
 # install basic tools
 ansible-playbook /etc/ansible/roles/basics.yml
