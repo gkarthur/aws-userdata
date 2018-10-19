@@ -10,9 +10,8 @@ wget https://raw.githubusercontent.com/gkarthur/ansible/master/basics.yml
 wget https://raw.githubusercontent.com/gkarthur/ansible/master/java.yml
 wget https://raw.githubusercontent.com/gkarthur/ansible/master/maven.yml
 
-sudo chmod +x install-ansible-ami.sh
+chmod +x install-ansible-ami.sh
 ./install-ansible-ami.sh
-
 
 cp -f *.yml /etc/ansible/roles/
 
